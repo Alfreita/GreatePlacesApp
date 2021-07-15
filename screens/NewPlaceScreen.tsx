@@ -8,10 +8,17 @@ import {
   ScrollView,
 } from "react-native";
 import Color from "../constants/Color";
+import { useDispatch } from "react-redux";
+import * as placesAction from "../store/actions/placesAction";
 
 const NewPlaceScreen = (props: any) => {
   const [title, setTitle] = useState("");
-  const savePlaceHandler = () => {};
+  const { navigation } = props;
+  const dispatch = useDispatch();
+  const savePlaceHandler = () => {
+    dispatch(placesAction.addPlace(title));
+    navigation.goBack();
+  };
   return (
     <ScrollView>
       <View style={styles.form}>
