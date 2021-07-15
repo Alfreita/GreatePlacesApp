@@ -8,7 +8,6 @@ import PlaceDetailScreen from "../screens/PlaceDetailScreen";
 import PlacesListScreen from "../screens/PlacesListScreen";
 import Color from "../constants/Color";
 
-
 const PlacesStackNavigator = createStackNavigator();
 
 const defaultHeaderStyle = () => {
@@ -17,9 +16,6 @@ const defaultHeaderStyle = () => {
       backgroundColor: Platform.OS === "android" ? Color.primary : "",
     },
     headerTintColor: Platform.OS === "android" ? "white" : Color.primary,
-    // headerTitleStyle: {
-    //   fontFamily: "open-sans-bold",
-    // },
   };
 };
 const placesNavigator = () => {

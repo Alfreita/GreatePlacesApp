@@ -20,6 +20,7 @@ const PlacesListScreen = (props: any) => {
       ),
     });
   }, [navigation]);
+
   return (
     <FlatList
       data={placesList}
