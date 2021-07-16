@@ -18,13 +18,13 @@ const NewPlaceScreen = (props: any) => {
   const { navigation } = props;
   const dispatch = useDispatch();
   const savePlaceHandler = () => {
-    dispatch(placesAction.addPlace(title));
+    dispatch(placesAction.addPlace(title, imageTake));
     navigation.goBack();
   };
   return (
     <ScrollView>
       <View style={styles.form}>
-        <Text style={styles.label}> New Place</Text>
+        <Text style={styles.label}> Title</Text>
         <TextInput
           onChangeText={(text) => setTitle(text)}
           value={title}
