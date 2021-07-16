@@ -14,6 +14,7 @@ import ImagePickerComponent from "../components/ImageSelector";
 
 const NewPlaceScreen = (props: any) => {
   const [title, setTitle] = useState("");
+  const [imageTake, setImageTake] = useState("");
   const { navigation } = props;
   const dispatch = useDispatch();
   const savePlaceHandler = () => {
@@ -29,7 +30,7 @@ const NewPlaceScreen = (props: any) => {
           value={title}
           style={styles.textInput}
         />
-        <ImagePickerComponent />
+        <ImagePickerComponent setImage={setImageTake} />
         <Button
           title="Save Place"
           color={Color.primary}
