@@ -16,10 +16,12 @@ import LocationPicker from "../components/LocationPicker";
 const NewPlaceScreen = (props: any) => {
   const [title, setTitle] = useState("");
   const [imageTake, setImageTake] = useState("");
+  const [pickAPlace, setAPlace] = useState<any>();
   const { navigation } = props;
   const dispatch = useDispatch();
   const savePlaceHandler = () => {
-    dispatch(placesAction.addPlace(title, imageTake));
+    console.log(pickAPlace);
+    dispatch(placesAction.addPlace(title, imageTake, pickAPlace));
     navigation.goBack();
   };
   return (
@@ -32,7 +34,7 @@ const NewPlaceScreen = (props: any) => {
           style={styles.textInput}
         />
         <ImagePickerComponent setImage={setImageTake} />
-        <LocationPicker navigation={navigation} />
+        <LocationPicker navigation={navigation} setAPlace={setAPlace} />
         <Button
           title="Save Place"
           color={Color.primary}

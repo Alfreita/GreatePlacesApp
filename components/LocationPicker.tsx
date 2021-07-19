@@ -25,6 +25,7 @@ const LocationPicker = (props: any) => {
         lng: pickAPlace.longitude,
       };
       setPickedLocation(latlng);
+      props.setAPlace(latlng);
     }
   }, [pickAPlace, setPickAPlace]);
   const handleUserLocation = async () => {
@@ -42,6 +43,7 @@ const LocationPicker = (props: any) => {
         lng: location.coords.longitude,
       };
       setPickedLocation(latlng);
+      props.setAPlace(latlng);
     } catch (error) {
       alert("An error occurred, please try again");
       setIsLoading(false);
