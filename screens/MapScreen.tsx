@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useEffect } from "react";
-import { View, StyleSheet, Text, Platform } from "react-native";
+import { View, StyleSheet, Text, Platform, Alert } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../components/HeaderCustomButtom";
@@ -27,8 +27,12 @@ const MapScreen = (props: any) => {
             title="Add places"
             iconName={Platform.OS === "android" ? "md-save" : "ios-save"}
             onPress={() => {
-              setLocation(selectedLocation);
-              navigation.goBack();
+              if (selectedLocation) {
+                setLocation(selectedLocation);
+                navigation.goBack();
+              } else {
+                Alert.alert("ops", "please pick a place", [{ text: "okay" }]);
+              }
             }}
           />
         </HeaderButtons>
