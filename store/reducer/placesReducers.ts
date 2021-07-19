@@ -11,7 +11,10 @@ const placesReducers = (state = initialState, action: any) => {
       const newPlace = new Place(
         action.placeData.id.toString(),
         action.placeData.title,
-        action.placeData.image
+        action.placeData.image,
+        action.placeData.address,
+        action.placeData.coords.lat,
+        action.placeData.coords.lng
       );
       return {
         places: state.places.concat(newPlace),
@@ -20,7 +23,14 @@ const placesReducers = (state = initialState, action: any) => {
       return {
         places: action.places.map(
           (places: any) =>
-            new Place(places.id.toString(), places.title, places.imageURL)
+            new Place(
+              places.id.toString(),
+              places.title,
+              places.imageURL,
+              places.address,
+              places.lat,
+              places.lng
+            )
         ),
       };
     default:
