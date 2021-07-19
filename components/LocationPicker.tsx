@@ -38,6 +38,9 @@ const LocationPicker = (props: any) => {
       setIsLoading(false);
     }
   };
+  const pickOnMap = async () => {
+    props.navigation.navigate({ name: "Map" });
+  };
   return (
     <View style={styles.locationPicker}>
       <View style={styles.mapPreview}>
@@ -47,15 +50,22 @@ const LocationPicker = (props: any) => {
           <Text>No location chosen yet!!!</Text>
         )}
       </View>
-      {isLoading ? (
-        <ActivityIndicator size="large" color={Color.primary} />
-      ) : (
+      <View style={styles.buttonView}>
+        {isLoading ? (
+          <ActivityIndicator size="large" color={Color.primary} />
+        ) : (
+          <Button
+            title="Get User location"
+            onPress={handleUserLocation}
+            color={Color.primary}
+          />
+        )}
         <Button
-          title="Get User location"
-          onPress={handleUserLocation}
+          title="Pick a place"
+          onPress={pickOnMap}
           color={Color.primary}
         />
-      )}
+      </View>
     </View>
   );
 };
@@ -67,11 +77,15 @@ const styles = StyleSheet.create({
   mapPreview: {
     marginBottom: 10,
     width: "100%",
-    height: 150,
+    height: 250,
     borderColor: "#CCC",
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  buttonView: {
+    justifyContent: "space-between",
+    flexDirection: "row",
   },
 });
 export default LocationPicker;

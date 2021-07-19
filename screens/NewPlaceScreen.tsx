@@ -32,7 +32,7 @@ const NewPlaceScreen = (props: any) => {
           style={styles.textInput}
         />
         <ImagePickerComponent setImage={setImageTake} />
-        <LocationPicker />
+        <LocationPicker navigation={navigation} />
         <Button
           title="Save Place"
           color={Color.primary}
