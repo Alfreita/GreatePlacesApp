@@ -9,7 +9,7 @@ const MapPreview = (props: any) => {
       <Image
         style={styles.image}
         source={{
-          uri: "https://maps.googleapis.com/maps/api/staticmap?center=-22.9516081,-47.0310086&zoom=14&size=400x200&maptype=roadmap&markers=color:red%7Clabel:A%7C-22.9516081,-47.0310086&key=AIzaSyCFvXdxTJfYpSMxpWCyTvXBAY0__GiCxfg",
+          uri: imagePreview,
         }}
       />
     </View>

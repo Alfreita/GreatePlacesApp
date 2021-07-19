@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Button,
@@ -16,7 +16,17 @@ const LocationPicker = (props: any) => {
     lat: 0,
     lng: 0,
   });
+  const [pickAPlace, setPickAPlace] = useState<any>();
   const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    if (pickAPlace) {
+      const latlng = {
+        lat: pickAPlace.latitude,
+        lng: pickAPlace.longitude,
+      };
+      setPickedLocation(latlng);
+    }
+  }, [pickAPlace, setPickAPlace]);
   const handleUserLocation = async () => {
     try {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -32,14 +42,18 @@ const LocationPicker = (props: any) => {
         lng: location.coords.longitude,
       };
       setPickedLocation(latlng);
-      console.log(pickedLocation);
     } catch (error) {
       alert("An error occurred, please try again");
       setIsLoading(false);
     }
   };
   const pickOnMap = async () => {
-    props.navigation.navigate({ name: "Map" });
+    props.navigation.navigate({
+      name: "Map",
+      params: {
+        setLocation: setPickAPlace,
+      },
+    });
   };
   return (
     <View style={styles.locationPicker}>

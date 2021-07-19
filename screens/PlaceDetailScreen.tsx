@@ -2,8 +2,8 @@ import React, { useLayoutEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
 
 const PlaceDetailScreen = (props: any) => {
-  const { image, title, address, onSelect } = props.route.params.title;
-  const { navigation } = props.navigation;
+  const { image, title, address, onSelect } = props.route.params;
+  const { navigation } = props;
   useLayoutEffect(() => {
     navigation.setOptions({
       title: title === "" ? "No title" : title,

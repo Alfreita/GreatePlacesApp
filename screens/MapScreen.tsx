@@ -1,9 +1,13 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import React, { useState, useLayoutEffect, useEffect } from "react";
+import { View, StyleSheet, Text, Platform } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import CustomHeaderButton from "../components/HeaderCustomButtom";
 
 const MapScreen = (props: any) => {
   const [selectedLocation, setSeletecedLocation] = useState<any>();
+  const { navigation } = props;
+  const { setLocation } = props.route.params;
   const mapRegion = {
     latitude: 37.7,
     longitude: -122.43,
@@ -12,8 +16,25 @@ const MapScreen = (props: any) => {
   };
   const selectedPlace = (event: any) => {
     const { latitude, longitude } = event.nativeEvent.coordinate;
-    setSeletecedLocation({ latitude, longitude });
+    const setlatlong = { latitude, longitude };
+    setSeletecedLocation(setlatlong);
   };
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+            title="Add places"
+            iconName={Platform.OS === "android" ? "md-save" : "ios-save"}
+            onPress={() => {
+              setLocation(selectedLocation);
+              navigation.goBack();
+            }}
+          />
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation, selectedLocation, setLocation]);
   return (
     <MapView style={styles.map} region={mapRegion} onPress={selectedPlace}>
       {selectedLocation ? (
