@@ -35,7 +35,23 @@ export const insert = async (
           resolve(result);
         },
         (_, err) => {
-          console.log(err);
+          reject(err);
+        }
+      );
+    });
+  });
+};
+
+export const fetchPlaces = () => {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `SELECT * from places;`,
+        [],
+        (_, result) => {
+          resolve(result);
+        },
+        (_, err) => {
           reject(err);
         }
       );

@@ -1,4 +1,4 @@
-import { ADD_PLACES } from "../actions/placesAction";
+import { ADD_PLACES, SET_PLACES } from "../actions/placesAction";
 import Place from "../../model/place";
 
 const initialState = {
@@ -15,6 +15,13 @@ const placesReducers = (state = initialState, action: any) => {
       );
       return {
         places: state.places.concat(newPlace),
+      };
+    case SET_PLACES:
+      return {
+        places: action.places.map(
+          (places: any) =>
+            new Place(places.id.toString(), places.title, places.imageURL)
+        ),
       };
     default:
       return state;

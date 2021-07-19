@@ -1,6 +1,7 @@
 import * as FileSystem from "expo-file-system";
+import { fetchPlaces, insert } from "../../helpers/db";
 export const ADD_PLACES = "ADD_PLACES";
-import { insert } from "../../helpers/db";
+export const SET_PLACES = "SET_PLACES";
 
 export const addPlace = (title: string, image: string) => {
   const fileName = image.split("/").pop();
@@ -29,5 +30,13 @@ export const addPlace = (title: string, image: string) => {
       console.log(error);
       throw error;
     }
+  };
+};
+export const loadPlaces = () => {
+  return async (dipatch: any) => {
+    try {
+      const places: any = await fetchPlaces();
+      dipatch({ type: SET_PLACES, places: places.rows._array });
+    } catch (error) {}
   };
 };
