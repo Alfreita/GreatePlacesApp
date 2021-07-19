@@ -9,9 +9,13 @@ import {
 } from "react-native";
 import Color from "../constants/Color";
 import * as Location from "expo-location";
+import MapPreview from "./MapPreview";
 
 const LocationPicker = (props: any) => {
-  const [pickedLocation, setPickedLocation] = useState({});
+  const [pickedLocation, setPickedLocation] = useState({
+    lat: 0,
+    lng: 0,
+  });
   const [isLoading, setIsLoading] = useState(false);
   const handleUserLocation = async () => {
     try {
@@ -23,10 +27,12 @@ const LocationPicker = (props: any) => {
       setIsLoading(true);
       let location = await Location.getCurrentPositionAsync({});
       setIsLoading(false);
-      setPickedLocation({
+      const latlng = {
         lat: location.coords.latitude,
         lng: location.coords.longitude,
-      });
+      };
+      setPickedLocation(latlng);
+      console.log(pickedLocation);
     } catch (error) {
       alert("An error occurred, please try again");
       setIsLoading(false);
@@ -35,7 +41,11 @@ const LocationPicker = (props: any) => {
   return (
     <View style={styles.locationPicker}>
       <View style={styles.mapPreview}>
-        <Text>No location chosen yet</Text>
+        {pickedLocation.lat !== 0 || pickedLocation.lng !== 0 ? (
+          <MapPreview location={pickedLocation} />
+        ) : (
+          <Text>No location chosen yet!!!</Text>
+        )}
       </View>
       {isLoading ? (
         <ActivityIndicator size="large" color={Color.primary} />
